@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Someone Special</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: #333;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- EFEK HUJAN HATI CSS --- */
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        .heart-fall {
+            position: absolute;
+            top: -50px;
+            color: #ff6b6b;
+            font-size: 1.5rem;
+            animation: fall 10s linear infinite;
+            user-select: none;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        /* ---------------------------------- */
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Page Styling */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .page {
+            animation: fadeIn 0.8s ease-out;
+            width: 100%;
+            max-width: 700px;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Login Page */
+        #login-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .heart-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #ff6b6b;
+            transform: rotate(45deg);
+            margin: 20px;
+            position: relative;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1) rotate(45deg); }
+            50% { transform: scale(1.1) rotate(45deg); }
+            100% { transform: scale(1) rotate(45deg); }
+        }
+
+        .heart-icon:before,
+        .heart-icon:after {
+            content: '';
+            width: 80px;
+            height: 80px;
+            background-color: #ff6b6b;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart-icon:before {
+            top: -40px;
+            left: 0;
+        }
+
+        .heart-icon:after {
+            top: 0;
+            left: -40px;
+        }
+
+        .login-title {
+            color: #ff6b6b;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-form {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        input:focus {
+            border-color: #ff6b6b;
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+        }
+
+        /* --- EFEK GLOW PADA BUTTON --- */
+        .btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn:hover {
+            background-color: #ff4757;
+            transform: translateY(-2px);
+            box-shadow: 0 0 5px #ff4757, 0 0 20px #ff4757, 0 0 40px #ff4757;
+        }
+        /* ---------------------------------- */
+
+        /* Text Page */
+        .text-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #444;
+
+            border-right: .15em solid #ff6b6b;
+            white-space: pre-wrap;
+            overflow: hidden; 
+            margin: 0 auto; 
+            letter-spacing: .05em;
+            animation: 
+                blink-caret .75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #ff6b6b; }
+        }
+
+        .finished-typing {
+            border-right: none !important;
+        }
+
+        .text-content p {
+            margin-bottom: 10px; 
+        }
+        .responsive-img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(255, 1, 1, 0.1);
+            cursor: pointer;
+            transition: transform 0.5s ease-out, box-shadow 0.5s ease-out;
+        }
+
+        .responsive-img:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.5);
+        }
+        /* -------------------------------------- */
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .nav-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: #ff4757;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="login-page" class="page">
+            <div class="heart-icon"></div>
+            <h1 class="login-title">HALO TUAN PUTRI</h1>
+
+            <form class="login-form" onsubmit="login(event)">
+                <div class="form-group">
+                    <label for="date">Tanggal Spesial Kita</label>
+                    <input type="date" id="date" value="2025-12-04" required>
+                </div>
+
+                <button type="submit" class="btn">Masuk ke Hati Saya</button>
+            </form>
+        </div>
+
+        <div id="text-page" class="page hidden">
+            <div id="typewriter-text" class="text-content">
+                <p>
+                    Cepet sembuh ya, cantik, sejujurnya aku kaget banget pas denger km kecelakaan, especially setelah kita lost contact ga cukup lama.
+                    Maaf bgt aku blm bisa jenguk km karena jaraknya lumayan jauh, tp aku disini selalu doain km.
+                    May God always protect u and the good people around u.Maaf juga kalo aku belum bisa kayak seseorang yg selalu gives his full effort to the girl he loves.
+                    Meskipun kita belum memiliki status saat ini, tapi aku berharap kita bisa kayak dulu lagi. Maybe itu susah buat km, tapi aku bakal berusaha sebisaku. 
+                    Sorry if I have many shortcomings... 
+                    Cepat sembuh yaa...
+                </p>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevPage('text-page', 'login-page')">Kembali</button>
+                <button class="nav-btn" onclick="nextPage('text-page', 'photo-page')">Lanjut</button> 
+            </div>
+        </div>
+
+        <div id="photo-page" class="page hidden">
+            <h2 class="album-title" style="text-align:center; color:#ff6b6b;">LOVE YOU TUAN PUTRI</h2>
+            <p style="text-align:center; margin-bottom: 20px;">
+            Semoga Cepat Sembuh! ❤️
+            </p>
+
+            <img src="Gambar WhatsApp 2025-12-03 pukul 03.26.59_31bcc664.jpg" class="responsive-img" alt="WhatsApp Image">
+            <img src="Gambar WhatsApp 2025-12-03 pukul 03.26.59_e0f2752b.jpg" class="responsive-img" alt="WhatsApp Image">
+
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevPage('photo-page', 'text-page')">Kembali</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- EFEK HUJAN HATI JS ---
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-fall');
+            heart.innerHTML = '💖'; 
+
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 8 + 5 + 's'; 
+            heart.style.opacity = Math.random();
+            
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 10000); 
+        }
+
+        setInterval(createHeart, 300); 
+        // ----------------------------------
+
+        // Variabel untuk Typewriter Effect
+        let i = 0;
+        let fullTextContent = '';
+        let typewriterDiv;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            typewriterDiv = document.getElementById('typewriter-text');
+            if (typewriterDiv) {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = typewriterDiv.innerHTML;
+                fullTextContent = tempDiv.innerHTML.trim();
+                typewriterDiv.innerHTML = '';
+                typewriterDiv.classList.add('finished-typing');
+            }
+        });
+
+        // --- EFEK TYPEWRITER JS ---
+        function typeWriter() {
+            if (i < fullTextContent.length) {
+                const char = fullTextContent.charAt(i);
+                
+                if (char === '<') {
+                    const tagEnd = fullTextContent.indexOf('>', i);
+                    if (tagEnd !== -1) {
+                        typewriterDiv.innerHTML += fullTextContent.substring(i, tagEnd + 1);
+                        i = tagEnd + 1;
+                    }
+                } else {
+                    typewriterDiv.innerHTML += char;
+                    i++;
+                }
+
+                setTimeout(typeWriter, 50);
+            } else {
+                typewriterDiv.classList.add('finished-typing');
+            }
+        }
+        // ----------------------------------
+
+        function login(e) {
+            e.preventDefault();
+            const dateInput = document.getElementById('date').value;
+            const correctPassword = "04122025";
+
+            const d = new Date(dateInput);
+            const day = String(d.getDate()).padStart(2, '0');
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const year = d.getFullYear();
+            const userPassword = day + month + year;
+
+            if (userPassword === correctPassword) {
+                nextPage('login-page', 'text-page');
+            } else {
+                alert("Tanggal yang kamu masukkan tidak sesuai. Coba lagi.");
+            }
+        }
+
+        function nextPage(current, next) {
+            document.getElementById(current).classList.add("hidden");
+            document.getElementById(next).classList.remove("hidden");
+            window.scrollTo(0, 0);
+
+            // Jika pindah ke halaman teks, mulai Typewriter
+            if (next === 'text-page' && fullTextContent) {
+                typewriterDiv.innerHTML = '';
+                i = 0;
+                typewriterDiv.classList.remove('finished-typing');
+                typeWriter();
+            }
+        }
+
+        function prevPage(current, prev) {
+            document.getElementById(current).classList.add("hidden");
+            document.getElementById(prev).classList.remove("hidden");
+            window.scrollTo(0, 0);
+            
+            if (current === 'text-page') {
+                i = fullTextContent.length;
+                typewriterDiv.classList.add('finished-typing');
+            }
+        }
+    </script>
+</body>
+</html>
